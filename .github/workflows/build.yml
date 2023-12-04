@@ -18,8 +18,20 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{!startsWith(github.event.head_commit.message, 'skip-build') }}
     steps:
+
+
       - name: Set up Git repository
         uses: actions/checkout@v3
+
+      - name: Download Fonts
+        uses: robinraju/release-downloader@v1.8
+        with:
+          tag: "Latex-lite"
+          # Choose what fonts you need from https://github.com/MohammadRaziei/fonts/releases
+          repository: "mohammadraziei/fonts"
+          fileName: "fonts.zip"
+          out-file-path: "fonts"
+          extract: true
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
@@ -27,14 +39,16 @@ jobs:
           root_file: main.tex
           latexmk_use_xelatex: true
 #          texlive_version: 2022
-#          extra_fonts: |
-#            ./fonts/*/*.ttf
+          extra_fonts: ./fonts/*.ttf
 
+#      - name: Preview files
+#        run: tree --du -shaC .
+#
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
           name: PDF
-          path: main*.pdf
+          path: main.pdf
 
   release:
     name: Upload Release Asset
