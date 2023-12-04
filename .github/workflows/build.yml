@@ -18,10 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{!startsWith(github.event.head_commit.message, 'skip-build') }}
     steps:
-      - name: Why trigger?
-        run: |
-          echo "event name: ${{ github.event_name }}"
-          echo "event action: ${{ github.event.action }}"
       - name: Set up Git repository
         uses: actions/checkout@v3
 
@@ -30,9 +26,9 @@ jobs:
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
-          texlive_version: 2022
-          extra_fonts: |
-            ./fonts/*/*.ttf
+#          texlive_version: 2022
+#          extra_fonts: |
+#            ./fonts/*/*.ttf
 
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
