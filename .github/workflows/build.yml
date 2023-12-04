@@ -1,0 +1,57 @@
+name: Build LaTeX document
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+    tags:
+      - "*"
+
+
+permissions:
+  contents: write
+
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    if: ${{!startsWith(github.event.head_commit.message, 'skip-build') }}
+    steps:
+      - name: Why trigger?
+        run: |
+          echo "event name: ${{ github.event_name }}"
+          echo "event action: ${{ github.event.action }}"
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          latexmk_use_xelatex: true
+          texlive_version: 2022
+          extra_fonts: |
+            ./fonts/*/*.ttf
+
+      - name: Upload PDF file
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: main*.pdf
+
+  release:
+    name: Upload Release Asset
+    needs: [ build_latex ]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/download-artifact@v3
+        with: # download all PDF files
+          name: PDF
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            *.pdf
