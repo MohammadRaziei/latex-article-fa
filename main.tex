@@ -1,15 +1,60 @@
-%! Author = Mohammad
-%! Date = 12/4/2023
+\documentclass[12pt,onecolumn,a4paper]{article}
+\usepackage{epsfig,graphicx,subfigure,amsthm,amsmath}
+\usepackage{color,xcolor}
 
-% Preamble
-\documentclass[12pt]{article}
 
-% Packages
-\usepackage{amsmath}
+\usepackage{xepersian}
+\settextfont[Scale=1.2]{B Nazanin}
+\setlatintextfont[Scale=1]{Times New Roman}
+\setmathdigitfont{Yas}
 
-% Document
+
+
+\linespread{1.5}
+
+
 \begin{document}
-This is a sample text
+
+    \title{عنوان مقاله}
+    \author{}
+    \date{\today}
+    \maketitle
+
+
+    \section{مقدمه}
+    در این قسمت مطالب مربوط به بخش مقدمه آورده می شود.\\
+    این یک فرمت ساده است، شما می توانید با استفاده از دستورات لاتک و پاک کردن قسمت های نوشته شده، فایل مدنظر خود را بسازید.\\
+    متن زیر از سایت ویکی پدیا کپی پیست شده است و ممکن است بعضی جاها خوب نمایش داده نشود
+
+
+    سایت \lr{overleaf.com} یک ویرایشگر آنلاین \lr{\LaTeX{}} است که این اجازه را به ما می دهد در هرجایی تنها با داشتن اینترنت به پروژه های خود دسترسی داشته باشیم.\\
+    با نگارش متن علمی در فضای ابری (آنلاین)، علاوه بر داشتن امکان کار مشترک بر روی مقاله، ما از اجبار به استفاده از یک کامپیوتر مشخص نیز رها خواهیم شد. به عبارت دیگر هر کامپیوتر متصل به اینترنت کامپیوتر کار علمی شما خواهد بود. این موضوع به طور ویژه برای دانشجویانی که بر روی کامپیوتر های عمومی دانشگاه و آزمایشگاه تحقیقاتی خود مسیر نگارش متن علمی را به پیش می برند بسیار مفید خواهد بود. زیرا این دسته خواهند توانست بخشی از کار را در یک کامپیوتر به پیش برده و چند دقیقه بعد در یک کامپیوتر دیگر ادامه آن را پیگیری نمایند. از این جهت، در کنار امکان همکاری چند مولف بر روی مقاله، مستقل شدن نگارنده از کامپیوتر مورد استفاده مزیت دیگر نگارش ابری مقاله خواهد بود.\\
+
+    \section{فرمول نویسی}
+    این جوری فرمول ها را مینویسیم.
+    \begin{align*}
+        \max z =&\sum_{k=1}^{k_1}(c_{1}X^{1,K})\lambda_{1k}+\sum_{k=1}^{k_1}(c_{2}X^{2,K})\lambda_{2k}+\cdots+\sum_{k=1}^{k_n}(c_{n}X^{n,K})\lambda_{nk} \\
+        st:\qquad&\sum_{k=1}^{k_1} (A_{1}X^{1,k})\lambda_{1k}+\sum_{k=1}^{k_2}(A_{2}X^{2,k})\lambda_{2k}+\cdots+\sum_{k=1}^{k_n}(A_{n}X^{n,k})\lambda_{nk}\leq b_{0} \\
+        &\sum_{k=1}^{k_1}\lambda_{1k}=1\\
+        &\sum_{k=1}^{k_1}\lambda_{1k}=1\\
+        &\qquad\vdots\\
+        &\sum_{k=1}^{k_1}\lambda_{1k}=1\\
+        &\lambda_{jk}\geq 0\\
+    \end{align*}
+
+
+    \section{نتایج}
+    در این قسمت نتایج نوشته می شود.\\
+
+
+    \begin{thebibliography}{99}
+        \bibitem{}
+        سایت فرادرس
+        \bibitem{}
+        سایت ویکی پدیا فارسی
+
+
+    \end{thebibliography}
 
 
 \end{document}
