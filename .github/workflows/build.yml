@@ -17,9 +17,8 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     if: ${{!startsWith(github.event.head_commit.message, 'skip-build') }}
+    
     steps:
-
-
       - name: Set up Git repository
         uses: actions/checkout@v3
 
@@ -35,20 +34,32 @@ jobs:
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
+        continue-on-error: true
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
-#          texlive_version: 2022
+          latexmk_shell_escape: true
           extra_fonts: ./fonts/*.ttf
+          args: -synctex=1 -interaction=nonstopmode -pdfxe
+          post_compile: echo ">> DONE <<" && cat main.log
 
-#      - name: Preview files
-#        run: tree --du -shaC .
-#
+      # - name: Preview files
+        # run: tree --du -shaC .
+        
+      - name: Upload LOG files
+        uses: actions/upload-artifact@v3
+        with:
+          name: LOG
+          path: |
+            main.xdv
+            main.log
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
           name: PDF
           path: main.pdf
+          if-no-files-found: error
 
   release:
     name: Upload Release Asset
