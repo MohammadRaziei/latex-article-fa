@@ -40,7 +40,7 @@ jobs:
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
           extra_fonts: ./fonts/*.ttf
-          args: -synctex=1 -interaction=nonstopmode -pdfxe
+          # args: -synctex=1 -interaction=nonstopmode -pdfxe
           post_compile: echo ">> DONE <<" && cat main.log
 
       # - name: Preview files
@@ -60,6 +60,23 @@ jobs:
           name: PDF
           path: main.pdf
           if-no-files-found: error
+
+  preview:
+    name: Preview
+    needs: [ build_latex ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with: # download all PDF files
+          name: PDF
+      - name: Preview
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: "preview"
+          files: |
+            *.pdf
+
 
   release:
     name: Upload Release Asset
