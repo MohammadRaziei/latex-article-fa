@@ -21,7 +21,7 @@ Contributions are welcome and appreciated. If you want to contribute to this pro
 ## Badges
 
 You can use following code to have this badge
-[![Preview](https://img.shields.io/badge/Preview-%F0%9F%93%84%20PDF-red.svg)](https://github.com/MohammadRaziei/latex-article-fa/releases/download/preview/scanArticle.pdf)
+[![Preview](https://img.shields.io/badge/Preview-%F0%9F%93%84%20PDF-red.svg)](https://github.com/MohammadRaziei/latex-article-fa/releases/download/preview/main.pdf)
 for your Markdown file. but replace `<GITHUB_USERNAME>/<REPO_NAME>` with your options.
 
 ```md
