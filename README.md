@@ -18,6 +18,16 @@ Contributions are welcome and appreciated. If you want to contribute to this pro
 - Push your branch to your forked repository and create a pull request to the main branch.
 - Wait for your pull request to be reviewed and merged.
 
+## Badges
+
+You can use following code to have this badge
+[![Preview](https://img.shields.io/badge/Preview-%F0%9F%93%84%20PDF-red.svg)](https://github.com/MohammadRaziei/latex-article-fa/releases/download/preview/scanArticle.pdf)
+for your Markdown file. but replace `<GITHUB_USERNAME>/<REPO_NAME>` with your options.
+
+```md
+[![Preview](https://img.shields.io/badge/Preview-%F0%9F%93%84%20PDF-red.svg)](https://github.com/<GITHUB_USERNAME>/<REPO_NAME>/releases/download/preview/main.pdf)
+```
+
 
 ## License
 
