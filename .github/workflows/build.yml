@@ -47,7 +47,7 @@ jobs:
         # run: tree --du -shaC .
         
       - name: Upload LOG files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: LOG
           path: |
@@ -55,7 +55,7 @@ jobs:
             main.log
 
       - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PDF
           path: main.pdf
@@ -66,7 +66,7 @@ jobs:
     needs: [ build_latex ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with: # download all PDF files
           name: PDF
       - name: Preview
@@ -84,7 +84,7 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with: # download all PDF files
           name: PDF
 
