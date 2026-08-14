@@ -1,3 +1,4 @@
+% TeX program=xelatex
 % =====================================================================
 % تمپلیت مقاله IEEE (IEEEtran) به زبان فارسی با XeLaTeX و xepersian
 % =====================================================================
@@ -24,15 +25,96 @@
 % \documentclass[journal,onecolumn]{IEEEtran}
 
 % ------------------------- بسته‌های پایه -------------------------
-\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
 \usepackage{graphicx}
-\usepackage{cite}
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{setspace}
 \usepackage{cuted}
-%\usepackage{abstract}
+\usepackage{listings}
+\usepackage[numbers]{natbib}
 
+\usepackage{algorithm2e}
+\RestyleAlgo{ruled}
+\SetKwComment{Comment}{\color{gray}// }{}
+
+\usepackage{subcaption}
+
+\makeatletter
+\let\old@lstKV@SwitchCases\lstKV@SwitchCases
+\def\lstKV@SwitchCases#1#2#3{}
+\makeatother
+\usepackage{lstlinebgrd}
+\makeatletter
+\let\lstKV@SwitchCases\old@lstKV@SwitchCases
+
+\lst@Key{numbers}{none}{%
+	\def\lst@PlaceNumber{\lst@linebgrd}%
+	\lstKV@SwitchCases{#1}%
+	{none:\\%
+		left:\def\lst@PlaceNumber{\llap{\normalfont
+				\lst@numberstyle{\thelstnumber}\kern\lst@numbersep}\lst@linebgrd}\\%
+		right:\def\lst@PlaceNumber{\rlap{\normalfont
+				\kern\linewidth \kern\lst@numbersep
+				\lst@numberstyle{\thelstnumber}}\lst@linebgrd}%
+	}{\PackageError{Listings}{Numbers #1 unknown}\@ehc}}
+\makeatother
+\newcounter{subListing}[subfigure]
+
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\lstdefinelanguage{CUDA}{
+	language=C++,
+	morekeywords=[1]{__device__, __global__, __shared__, __constant__, __managed__, __restrict__},
+	morekeywords=[2]{uchar, uchar2, uchar3, uchar4,
+		char2, char3, char4,
+		ushort, ushort2, ushort3, ushort4,
+		short2, short3, short4,
+		uint, uint2, uint3, uint4,
+		int2, int3, int4,
+		ulong, ulong2, ulong3, ulong4,
+		long2, long3, long4,
+		float2, float3, float4,
+		double2, double3, double4,
+		dim3, cudaError_t, cudaMemcpyKind},
+	keywordstyle=[1]\color{blue},
+	keywordstyle=[2]\color{purple},
+	morecomment=[l]{//},
+	commentstyle=\color{deepgreen}
+}
+
+\newcommand{\boxc}[1]{\colorbox{lightgray}{#1}}
+
+\lstset{language=CUDA,
+	basicstyle=\ttfamily\scriptsize,
+	frame=single,
+	rulecolor=\color{gray},
+	showstringspaces=false,
+	columns=fullflexible,
+	numbers=left,
+	numberstyle={\tiny\color{gray}},
+	numbersep=8pt,
+	%	breaklines=true,
+	postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+	tabsize=2,
+	escapechar=`,
+	xleftmargin=1.8em,
+	framexleftmargin=2em,
+}
+
+
+\let\keptmaketitle\maketitle
+\usepackage[
+colorlinks=true,
+linkcolor=blue,
+citecolor=blue,
+urlcolor=blue,
+pdfstartview=FitH]{hyperref}
+\usepackage{url,doi}
+\let\maketitle\keptmaketitle
 % ------------------------- پشتیبانی فارسی -------------------------
 % باید بعد از بسته‌های بالا لود شود.
 % توجه: عمداً hyperref را اینجا دستی لود نکرده‌ایم؛ بسته‌ی xepersian
@@ -56,7 +138,8 @@
 \makeatother
 
 
-
+\newtheorem{theorem}{قضیه}
+\newtheorem{lemma}{لم}
 
 
 % ------------------------- اطلاعات مقاله -------------------------
@@ -153,7 +236,9 @@
 	
 	% =====================================================================
 	% منابع با BibTeX (فایل references.bib را در همین پوشه ببینید)
-	\bibliographystyle{IEEEtran}
+	nocite{*}
+	\bibliographystyle{plainnat-fa}
 	\bibliography{references}
-	
+
+
 \end{document}
