@@ -1,0 +1,6 @@
+ LHSName "fix-quote"
+ RHSName "Unicode"
+ pass(Unicode)
+
+ U+00AB > U+003C
+ U+00BB > U+003E
