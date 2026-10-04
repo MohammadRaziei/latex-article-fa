@@ -39,6 +39,15 @@
 \SetKwComment{Comment}{\color{gray}// }{}
 
 \usepackage{subcaption}
+\usepackage{placeins}
+
+
+\makeatletter
+\newif\if@infw
+\newenvironment{fullwidth}
+{\if@twocolumn\@infwtrue\strip\else\@infwfalse\fi}
+{\if@infw\endstrip\fi}
+\makeatother
 
 \makeatletter
 \let\old@lstKV@SwitchCases\lstKV@SwitchCases
@@ -125,11 +134,32 @@ pdfstartview=FitH]{hyperref}
 
 % فونت‌های متن (در صورت نیاز فونت سیستم خود را جایگزین کنید)
 \settextfont{XB Niloofar}
+\newfontfamily\fixedfont[Mapping=fix-quote]{XB Niloofar}
 \setlatintextfont{TeX Gyre Termes}
 \setdigitfont{Yas}
 
-\linespread{1.2}
+
+\linespread{1.3}
 %\textlabeldelim{:}
+
+%\makeatletter
+%\renewcommand\@seccntformat[1]{%
+%	\lr{\csname the#1\endcsname}\lr{.}\hskip 0.5em
+%}
+\makeatother
+\makeatletter
+\long\def\@makecaption#1#2{%
+	\vskip\abovecaptionskip
+	\sbox\@tempboxa{\textbf{#1}\lr{:}\hskip 0.5em #2}%
+	\ifdim \wd\@tempboxa >\hsize
+	\textbf{#1}\lr{:}\hskip 0.5em #2\par
+	\else
+	\global \@minipagefalse
+	\hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+	\fi
+	\vskip\belowcaptionskip}
+\makeatother
+
 
 \makeatletter
 \renewcommand{\IEEEkeywordsname}{کلیدواژه‌ها}
@@ -160,7 +190,7 @@ pdfstartview=FitH]{hyperref}
 	
 	\maketitle
 	
-	\begin{strip}
+	\begin{fullwidth}
 		\begin{abstract}
 			در این قسمت چکیده‌ی مقاله نوشته می‌شود. چکیده باید کوتاه و گویا باشد و
 			هدف، روش، نتایج و دستاورد اصلی پژوهش را در یک یا دو پاراگراف کوتاه بیان کند.
@@ -170,7 +200,8 @@ pdfstartview=FitH]{hyperref}
 		\begin{IEEEkeywords}
 			کلیدواژه اول, کلیدواژه دوم, کلیدواژه سوم, کلیدواژه چهارم
 		\end{IEEEkeywords}
-	\end{strip}
+	\end{fullwidth}
+	\FloatBarrier
 	% =====================================================================
 	\section{مقدمه}
 	% توجه: از \IEEEPARstart (حرف بزرگ آغازین لاتین) در متن فارسی استفاده
@@ -238,6 +269,7 @@ pdfstartview=FitH]{hyperref}
 	% =====================================================================
 	% منابع با BibTeX (فایل references.bib را در همین پوشه ببینید)
 	\nocite{*}
+	\setLTRbibitems
 	\bibliographystyle{plainnat-fa}
 	\bibliography{references}
 
